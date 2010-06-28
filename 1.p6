@@ -1,7 +1,11 @@
 use v6;
 
-sub todo ($todo) {
-    note '# TODO ' ~ $todo;
+{
+    my $count = 0;
+    sub my_todo ($todo) {
+        note "# TODO {$count++}: $todo";
+    }
+    our &todo = &my_todo;
 }
 
 sub newline () {
@@ -284,7 +288,8 @@ aplexample 'bn,⌽bn',
   "0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0";
 
 say 'A similar function isn\'t present in the Perl 6 spec, but can be written.';
-todo 'Implement a mixed base arithmetic encode/decode function and or module.';
+todo 'Implement a mixed base arithmetic encode/decode function and/or module.';
+todo 'Add Perl 6 examples for APL "⊤".';
 newline;
 say 'This last matrix can be interpreted as the binary representations of the numbers, as all subsets of a three-element set, or as possible entries in a truth-table with three boolean arguments. Iverson provides the general expression for a similar matrix with n elements as "(n⍴2)⊤(⍳2*n)-1". In the direct definition form, with "⍵" being the argument of the function, this function is defined with the following APL code "T:(⍵⍴2)⊤(⍳2*⍵)-1".';
 
@@ -299,3 +304,35 @@ say 'sub T ($n) {';
 say '    base_encode(2 xx $n, ^2..$n);';
 say '}';
 todo 'Turn the "sub T" into an example.';
+todo 'Explain "sub T" more thoroughly.';
+newline;
+
+say 'Another useful technique is the conditional, which in APL is represented by three expressions separated by colons. The middle expression is evaluated. If its result is zero, then the first expression is evaluated. Otherwise, the last expression is. In Perl, an "if" statement is used for this purpose.';
+
+aplexample "bc:(x,0)+(0,x←bc ⍵-1):⍵=0:1\n"
+  ~ "bc 0",
+  "1";
+aplexample "bc 1", "1 1";
+aplexample "bc 4", "1 4 6 4 1";
+
+sub bc ($i) {
+    if ($i == 0) {
+        1;
+    } else {
+        my @x = bc $i - 1;
+        (@x, 0) >>+<< (0, @x);
+    }
+}
+todo 'Figure out a way to not have to write subs that should be both exampled and actually defined twice.';
+
+example 'sub bc ($i) {' ~ "\n" ~
+  '    if ($i == 0) {' ~ "\n" ~
+  '        1;' ~ "\n" ~
+  '    } else {' ~ "\n" ~
+  '        my @x = bc $i - 1;' ~ "\n" ~
+  '        (@x, 0) >>+<< (0, @x);' ~ "\n" ~
+  '    }' ~ "\n" ~
+  '}';
+example 'bc 0';
+example 'bc 1';
+example 'bc 4';
