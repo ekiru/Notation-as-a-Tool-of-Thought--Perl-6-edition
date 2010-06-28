@@ -266,3 +266,17 @@ say 'Iverson gives two more examples of constant names: the "," and "⊤" functi
 aplexample '(⍳5),(⌽⍳5)', '1 2 3 4 5 5 4 3 2 1';
 say 'The Perl 6 equivalent of "a,b" is "(@a, @b)".';
 example '(1..5, (1..5).reverse)';
+
+aplexample '2 2 2 ⊤ 3', '0 1 1';
+aplexample '2 2 2 ⊤ 4', '1 0 0';
+aplexample "bn←2 2 2 ⊤ 0 1 2 3 4 5 6 7\nbn",
+  "0 0 0 0 1 1 1 1\n" ~
+  "0 0 1 1 0 0 1 1\n" ~
+  "0 1 0 1 0 1 0 1";
+
+aplexample 'bn,⌽bn',
+  "0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0\n" ~
+  "0 0 1 1 0 0 1 1 1 1 0 0 1 1 0 0\n" ~
+  "0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0";
+
+say 'A similar function isn\'t present in the Perl 6 spec, but can be written.'
