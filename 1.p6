@@ -263,5 +263,5 @@ say 'The presence of "$" in front of all of the variables in the Perl 6 code may
 say 'Iverson gives two more examples of constant names: the "," and "⊤" functions. The "," function catenates its arguments. The "⊤" function encodes its second argument in the base denoted by its first.';
 
 aplexample '(⍳5),(⌽⍳5)', '1 2 3 4 5 5 4 3 2 1';
-say 'The Perl 6 equivalent of "a,b" is "[@a, @b]".';
-example '[1..5, (1..5).reverse]';
+say 'The Perl 6 equivalent of "a,b" is "(@a, @b)".';
+example '(1..5, (1..5).reverse)';
