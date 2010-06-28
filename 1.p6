@@ -1,5 +1,9 @@
 use v6;
 
+sub todo ($todo) {
+    note '# TODO ' ~ $todo;
+}
+
 sub newline () {
     say;
 }
@@ -279,4 +283,19 @@ aplexample 'bn,⌽bn',
   "0 0 1 1 0 0 1 1 1 1 0 0 1 1 0 0\n" ~
   "0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0";
 
-say 'A similar function isn\'t present in the Perl 6 spec, but can be written.'
+say 'A similar function isn\'t present in the Perl 6 spec, but can be written.';
+todo 'Implement a mixed base arithmetic encode/decode function and or module.';
+newline;
+say 'This last matrix can be interpreted as the binary representations of the numbers, as all subsets of a three-element set, or as possible entries in a truth-table with three boolean arguments. Iverson provides the general expression for a similar matrix with n elements as "(n⍴2)⊤(⍳2*n)-1". In the direct definition form, with "⍵" being the argument of the function, this function is defined with the following APL code "T:(⍵⍴2)⊤(⍳2*⍵)-1".';
+
+aplexample "T:(⍵⍴2)⊤(⍳2*⍵)-1\n" ~
+  "T 3",
+  "0 0 0 0 1 1 1 1 1 1 1 1 0 0 0 0\n" ~
+  "0 0 1 1 0 0 1 1 1 1 0 0 1 1 0 0\n" ~
+  "0 1 0 1 0 1 0 1 1 0 1 0 1 0 1 0";
+
+say 'With the radix encoding function defined and named "base_encode", the equivalent Perl 6 code is:';
+say 'sub T ($n) {';
+say '    base_encode(2 xx $n, ^2..$n);';
+say '}';
+todo 'Turn the "sub T" into an example.';
